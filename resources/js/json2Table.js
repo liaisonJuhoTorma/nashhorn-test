@@ -1,4 +1,3 @@
-
 /* global print */
 /* eslint-disable no-var */
 
@@ -73,13 +72,7 @@ RequestModel.prototype.parseJSONToArray = function parseJSONToArray(json) {
 };
 
 RequestModel.prototype.getArrayHeader = function getArrayHeader() {
-  var i = 0;
-  var headerString = '';
-  for (i = 0; i < this.headers.length; i += 1) {
-    headerString += paddTo(this.headers[i], ' ', this.columnWidths[i] + 2);
-  }
-
-  return headerString;
+  return this.stringifyArray(this.headers, ' ');
 };
 
 RequestModel.prototype.getArrayLimitter = function getArrayLimitter() {
@@ -94,21 +87,26 @@ RequestModel.prototype.getArrayLimitter = function getArrayLimitter() {
 
 RequestModel.prototype.getArrayValues = function getArrayValues() {
   var i = 0;
-  var j = 0;
-  var row = null;
   var valueString = '';
 
   for (i = 0; i < this.values.length; i += 1) {
-    row = this.values[i];
-    for (j = 0; j < row.length; j += 1) {
-      valueString += paddTo(row[j], ' ', this.columnWidths[j] + 2);
-    }
+    valueString += this.stringifyArray(this.values[i], ' ');
     valueString += '\n';
   }
 
   return valueString;
 };
 
+RequestModel.prototype.stringifyArray = function stringifyArray(arrayToStringify, paddChar) {
+  var i = 0;
+  var str = '';
+
+  for (i = 0; i < arrayToStringify.length; i += 1) {
+    str += paddTo(arrayToStringify[i], paddChar, this.columnWidths[i] + 2);
+  }
+
+  return str;
+};
 
 function doGet() { // eslint-disable-line no-unused-vars
   println('Service : json2Table, called with GET');
