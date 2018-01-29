@@ -1,0 +1,21 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+  mavenCentral()
+}
+
+sourceCompatibility = 1.9
+targetCompatibility = 1.9
+
+mainClassName = 'com.liaison.nashorn.Server'
+
+dependencies {
+  testCompile "junit:junit:4.12"
+  testCompile group: 'org.mockito', name: 'mockito-core', version: '1.9.5'
+}
+
+jar {
+  baseName = 'nashorn-test'
+  version = '0.1'
+}

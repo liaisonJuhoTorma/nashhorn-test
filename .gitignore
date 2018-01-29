@@ -2,3 +2,6 @@ bin
 node_modules
 package-lock.json
 .gradle
+gradle
+build
+.settings
